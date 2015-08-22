@@ -21,14 +21,14 @@ local frame = CreateFrame("Frame")
 
 local function CompactUnitFrame_UpdateMaxHealthHook(frame)
     if run_hook then
-        local auraMaxPc = select(15, UnitAura("boss1", "Aura of Contempt"))
+        local auraMaxPc = select(15, UnitAura("boss1", GetSpellInfo(179986)))
         local maxHealth = UnitHealthMax(frame.displayedUnit)
         frame.healthBar:SetMinMaxValues(0, maxHealth * (auraMaxPc / 100))
     end
 end
 
 local function CompactUnitFrame_Update()
-    local auraMaxPc = select(15, UnitAura("boss1", "Aura of Contempt"))
+    local auraMaxPc = select(15, UnitAura("boss1", GetSpellInfo(179986)))
     for i = 1, 40 do
         local frame = _G["CompactRaidFrame"..i]
         if frame and frame.displayedUnit then
@@ -65,7 +65,7 @@ local function Grid_Hook()
             function frame.indicators.bar:SetStatus(...)
                 local color, text, value, maxValue, texture, texCoords, count, start, duration = ...
                 -- Shouldn't need to check run_hook
-                local auraMaxPc = select(15, UnitAura("boss1", "Aura of Contempt"))
+                local auraMaxPc = select(15, UnitAura("boss1", GetSpellInfo(179986)))
                 Grid_old_SetStatus[guid](self, color, text, value, maxValue * (auraMaxPc / 100), texture, texCoords, count, start, duration)
             end
         end
@@ -82,7 +82,7 @@ local function Grid_Unhook()
 end
 
 local function Grid_Update()
-    local auraMaxPc = select(15, UnitAura("boss1", "Aura of Contempt"))
+    local auraMaxPc = select(15, UnitAura("boss1", GetSpellInfo(179986)))
     for _, frame in pairs(Grid:GetModule("GridFrame").registeredFrames) do
         local guid = frame.unitGUID
         if Grid_raid_guids[guid] then
@@ -118,7 +118,7 @@ local function VUHDO_setHealthHook(aUnit, aMode)
     -- Hook never executes?
     if run_hook then
         local vuhdo_raid = _G["VUHDO_RAID"]
-        local auraMaxPc = select(15, UnitAura("boss1", "Aura of Contempt"))
+        local auraMaxPc = select(15, UnitAura("boss1", GetSpellInfo(179986)))
         local tInfo = vuhdo_raid[aUnit]
         local maxHealth = UnitHealthMax(aUnit)
         tInfo["healthmax"] = maxHealth * (auraMaxPc / 100)
@@ -127,7 +127,7 @@ end
 
 local function VuhDo_Update()
     local vuhdo_raid = _G["VUHDO_RAID"]
-    local auraMaxPc = select(15, UnitAura("boss1", "Aura of Contempt"))
+    local auraMaxPc = select(15, UnitAura("boss1", GetSpellInfo(179986)))
     for i = 1, 40 do
         local tInfo = vuhdo_raid["raid"..i]
         local maxHealth = UnitHealthMax("raid"..i)
