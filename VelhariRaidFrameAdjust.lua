@@ -40,7 +40,7 @@ end
 
 local function CompactUnitFrame_Enable()
     hooksecurefunc("CompactUnitFrame_UpdateMaxHealth", CompactUnitFrame_UpdateMaxHealthHook)
-    update_ticker = C_Timer.NewTicker(0.5, CompactUnitFrame_Update)
+    update_ticker = C_Timer.NewTicker(1.5, CompactUnitFrame_Update)
 end
 
 local function CompactUnitFrame_Disable()
@@ -99,7 +99,7 @@ local function Grid_Enable()
         end
     end
     Grid_Hook()
-    update_ticker = C_Timer.NewTicker(0.5, Grid_Update)
+    update_ticker = C_Timer.NewTicker(1.5, Grid_Update)
 end
 
 local function Grid_Disable()
@@ -140,7 +140,7 @@ end
 
 local function VuhDo_Enable()
     hooksecurefunc("VUHDO_setHealth", VUHDO_setHealthHook)
-    update_ticker = C_Timer.NewTicker(0.5, VuhDo_Update)
+    update_ticker = C_Timer.NewTicker(1.5, VuhDo_Update)
 end
 
 local function VuhDo_Disable()
