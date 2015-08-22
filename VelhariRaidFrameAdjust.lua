@@ -158,15 +158,16 @@ end
 local Velhari_Enable
 local Velhari_Disable
 
-local function CombatLogHandler(_, event, _, _, _, _, _, _, _, _, _, ...)
-    if event == "SPELL_CAST_SUCCESS" then
-        local spellId = ...
-        if spellId == 179986 then
-            -- Phase 2 started, enable
+local function UnitAuraHandler(unitID)
+    if unitID ~= "boss1" then return end
+    local auraMaxPc = select(15, UnitAura(unitID, GetSpellInfo(179986)))
+    if auraMaxPc then
+        if not run_hook then
             run_hook = true
             Velhari_Enable()
-        elseif spellId == 179991 and GetRaidDifficultyID() ~= 16 then
-            -- Phase 3 started, disable for heroic/normal difficulty
+        end
+    else
+        if run_hook then
             run_hook = false
             Velhari_Disable()
         end
@@ -195,17 +196,14 @@ local function EventHandler(self, event, ...)
     elseif event == "ENCOUNTER_END" and encounterID == 1784 then
         in_encounter = false
         run_hook = false
-        if GetRaidDifficultyID() == 16 then
-            -- Encounter has ended, disable for mythic difficulty
-            Velhari_Disable()
-        end
+        Velhari_Disable()
     elseif in_encounter and (event == "ZONE_CHANGED" or event == "ZONE_CHANGED_NEW_AREA") then
         -- Did you just hearth?!
         in_encounter = false
         run_hook = false
         Velhari_Disable()
-    elseif in_encounter and event == "COMBAT_LOG_EVENT_UNFILTERED" then
-        CombatLogHandler(...)
+    elseif in_encounter and event == "UNIT_AURA" then
+        UnitAuraHandler(...)
     end
 end
 
@@ -214,6 +212,6 @@ frame:RegisterEvent("ENCOUNTER_START")
 frame:RegisterEvent("ENCOUNTER_END")
 frame:RegisterEvent("ZONE_CHANGED")
 frame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+frame:RegisterEvent("UNIT_AURA")
 
 frame:SetScript("OnEvent", EventHandler)
