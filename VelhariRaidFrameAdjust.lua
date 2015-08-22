@@ -94,7 +94,9 @@ end
 
 local function Grid_Enable()
     for i = 1, 40 do
-        Grid_raid_guids[UnitGUID("raid"..i)] = true
+        if UnitGUID("raid"..i) then
+            Grid_raid_guids[UnitGUID("raid"..i)] = true
+        end
     end
     Grid_Hook()
     update_ticker = C_Timer.NewTicker(0.5, Grid_Update)
