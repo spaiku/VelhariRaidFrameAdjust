@@ -1,9 +1,9 @@
 ## Interface: 60200
-## Version: 0.1
+## Version: 0.2.1
 ## Title: VelhariRaidFrameAdjust
 ## Notes: Adjusts raid frames for Aura of Contempt during Tyrant Velhari
 ## Author: Myrrh @ Talnivarr
-## Version: 0.1
+## Version: 0.2.1
 ## DefaultState: Enabled
 
-VelhariFix.lua
+VelhariRaidFrameAdjust.lua

@@ -178,7 +178,7 @@ end
 local function EventHandler(self, event, ...)
     local encounterID = ...
     if event == "PLAYER_ENTERING_WORLD" then
-        print("VelhariFix loaded")
+        print("VelhariRaidFrameAdjust loaded")
         if _G["VUHDO_RAID"] then
             print("VuhDo detected")
             Velhari_Enable = VuhDo_Enable
