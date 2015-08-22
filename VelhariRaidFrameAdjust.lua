@@ -158,6 +158,7 @@ end
 local Velhari_Enable
 local Velhari_Disable
 
+-- Credit to Aleaa @ MMO-C forums
 local function UnitAuraHandler(unitID)
     if unitID ~= "boss1" then return end
     local auraMaxPc = select(15, UnitAura(unitID, GetSpellInfo(179986)))
