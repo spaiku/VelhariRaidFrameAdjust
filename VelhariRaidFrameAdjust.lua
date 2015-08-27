@@ -44,7 +44,7 @@ local function CompactUnitFrame_Enable()
 end
 
 local function CompactUnitFrame_Disable()
-    update_ticker:Cancel()
+    if update_ticker then update_ticker:Cancel() end
     for i = 1, 40 do
         local frame = _G["CompactRaidFrame"..i]
         if frame and frame.displayedUnit then
@@ -103,7 +103,7 @@ local function Grid_Enable()
 end
 
 local function Grid_Disable()
-    update_ticker:Cancel()
+    if update_ticker then update_ticker:Cancel() end
     Grid_Unhook()
     for _, frame in pairs(Grid:GetModule("GridFrame").registeredFrames) do
         local guid = frame.unitGUID
@@ -144,7 +144,7 @@ local function VuhDo_Enable()
 end
 
 local function VuhDo_Disable()
-    update_ticker:Cancel()
+    if update_ticker then update_ticker:Cancel() end
     local vuhdo_raid = _G["VUHDO_RAID"]
     for i = 1, 40 do
         local tInfo = vuhdo_raid["raid"..i]
